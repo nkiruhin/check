@@ -13,7 +13,7 @@ namespace check.Models
     }
     public class CheckEntity
     {
-        List<Inspector> Inspectors;
+        public List<Inspector> Inspectors;
         public string ProviderOrganizationName { get; set; }
         public string INN { get; set; }
         public string OGRN { get; set; }
