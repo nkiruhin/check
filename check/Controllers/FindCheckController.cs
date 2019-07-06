@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using check.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -14,45 +16,44 @@ namespace check.Controllers
     {
         // GET: api/FindCheck
         [HttpGet]
-        public IEnumerable<string> Get()
+        public ActionResult<List<CheckEntity>> Get([FromQuery] string inn,string trim)
         {
+            if (string.IsNullOrEmpty(inn) && string.IsNullOrEmpty(trim))
+            {
+                return NotFound(new { message = "Данные не найдены" });
+            }
+
             XDocument data = XDocument.Load("c:/checks/data.xml");
+           
             string namespeces = "{"+data.Root.Name.NamespaceName+"}";
             var inspections = data.Root.Elements();
-            string inn = "2310031475";
+           
             var checks = inspections.Elements(namespeces + "I_SUBJECT")
-                .Where(n => n.Attribute("INN")?.Value == inn)
-                .Select(n => new
+                .Where(n => (string.IsNullOrEmpty(inn)|| n.Attribute("INN")?.Value == inn)
+                      &&(string.IsNullOrEmpty(trim) || n.Attribute("ORG_NAME").Value.ToLower().Contains(trim.ToLower()))
+                      )
+                .Select(n => new CheckEntity
                 {
-                    START_DATE = n.Parent.Attribute("START_DATE")?.Value,
-                    STATUS = n.Parent.Attribute("STATUS")?.Value,
-                    PROSEC_NAME = n.Parent.Attribute("PROSEC_NAME")?.Value,
-                    OKATO_NAME = n.Parent.Element(namespeces + "OKATO")?.Attribute("OKATO_NAME")?.Value,
-                    ITYPE_NAME = n.Parent.Attribute("ITYPE_NAME")?.Value,
-                    I_SUBJECT_ORG_NAME = n.Attribute("ORG_NAME")?.Value,
-                    ISUPERVISION_NAME = n.Parent.Element(namespeces + "I_CLASSIFICATION")?.Attribute("ISUPERVISION_NAME")?.Value,
-                    I_SUBJECT_INN = n.Attribute("INN").Value,
-                    I_SUBJECT_OGRN = n.Attribute("OGRN")?.Value,
-                    inspectors = n.Parent
+                    StartDate = n.Parent.Attribute("START_DATE")?.Value,
+                    Status = n.Parent.Attribute("STATUS")?.Value,
+                    ProsecutorsName = n.Parent.Attribute("PROSEC_NAME")?.Value,
+                    OkatoName = n.Parent.Element(namespeces + "OKATO")?.Attribute("OKATO_NAME")?.Value,
+                    TypeName = n.Parent.Attribute("ITYPE_NAME")?.Value,
+                    GoalOrganizationName = n.Attribute("ORG_NAME")?.Value,
+                    ProviderOrganizationName = n.Parent.Element(namespeces + "I_CLASSIFICATION")?.Attribute("ISUPERVISION_NAME")?.Value,
+                    INN = n.Attribute("INN")?.Value,
+                    OGRN = n.Attribute("OGRN")?.Value,
+                    Inspectors = n.Parent
                                 .Elements(namespeces + "I_INSPECTOR")
-                                .Select(v => new {
-                                    full_name = v.Attribute("FULL_NAME").Value,
-                                    position = v.Attribute("POSITION").Value
+                                .Select(v => new Inspector
+                                {
+                                    FullName = v.Attribute("FULL_NAME").Value,
+                                    Position = v.Attribute("POSITION").Value
                                 }).ToList()
-                    
-                }).ToList();
 
-                //var inspections_ = checks.Select(n => new
-                //{
-                //    START_DATE = n.Attribute("START_DATE")?.Value,
-                //    STATUS = n.Attributes().Where(x => x.Name.LocalName == "STATUS").FirstOrDefault()?.Value,
-                //    PROSEC_NAME = n.Attributes().Where(x => x.Name.LocalName == "PROSEC_NAME").FirstOrDefault()?.Value,
-                //    OKATO_NAME = n.Element(namespeces + "OKATO")?.Attributes().Where(x => x.Name.LocalName == "OKATO_NAME")?.FirstOrDefault().Value,
-                //    I_SUBJECT_ORG_NAME = n.Element(namespeces + "I_SUBJECT")?.Attributes().Where(x => x.Name.LocalName == "ORG_NAME")?.FirstOrDefault().Value,
-                //    I_SUBJECT_INN = n.Element(namespeces + "I_SUBJECT")?.Attributes().Where(x => x.Name.LocalName == "INN")?.FirstOrDefault().Value,
-                //    I_SUBJECT_OGRN = n.Element(namespeces + "I_SUBJECT")?.Attributes().Where(x => x.Name.LocalName == "OGRN")?.FirstOrDefault().Value,
-                //}).ToList();
-            return new string[] { "value1", "value2" };
+                });
+                
+            return checks.ToList();
         }
 
         // GET: api/FindCheck/5
