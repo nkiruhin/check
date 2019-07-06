@@ -34,6 +34,7 @@ namespace check
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<IdentityContext>(options => options.UseSqlite(Configuration.GetConnectionString("IdentityConnection")));
+            services.AddDbContext<Context>(options => options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
             services.AddIdentity<User, IdentityRole>(options =>
             {
                 options.Password.RequireNonAlphanumeric = false;
