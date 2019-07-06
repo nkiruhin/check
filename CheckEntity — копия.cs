@@ -18,7 +18,7 @@ namespace check.Models
         public string INN { get; set; }
         public string OGRN { get; set; }
         public string ProsecutorsName { get; set; }
-        public string StartDate { get; set; }
+        public DateTime StartDate { get; set; }
         public string Status { get; set; }
         public string TypeName { get; set; }
         public string OkatoName { get; set; }
