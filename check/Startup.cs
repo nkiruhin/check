@@ -16,8 +16,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
-using SalaryCalculator.Model;
-using SalaryCalculatorReact.Model;
+using checks.Model;
 
 namespace check
 {
@@ -34,7 +33,7 @@ namespace check
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<IdentityContext>(options => options.UseSqlite(Configuration.GetConnectionString("IdentityConnection")));
-            services.AddDbContext<Context>(options => options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<Context>(options => options.UseSqlite(Configuration.GetConnectionString("EntitiesConnection")));
             services.AddIdentity<User, IdentityRole>(options =>
             {
                 options.Password.RequireNonAlphanumeric = false;

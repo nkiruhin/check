@@ -1,17 +1,18 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
-namespace SalaryCalculatorReact.Model
+namespace checks.Model
 {
+    public class EntityInformation:IdentityUser
+    {
+        public string OrganizationName { get; set; }
+        public string ContactPhoneNumber { get; set; }
+    }
     public class Context:DbContext
     {
         public Context(DbContextOptions<Context> options)
               : base(options)
         { }
-        //public DbSet<Employee> Employees { get; set; }
-      
+        public DbSet<EntityInformation> Entities { get; set; }
     }
 }

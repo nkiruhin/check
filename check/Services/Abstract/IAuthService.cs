@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using SalaryCalculator.Model;
+using checks.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
