@@ -3,24 +3,21 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
-    <TypeScriptToolsVersion>3.4</TypeScriptToolsVersion>
+    <TypeScriptToolsVersion>3.1</TypeScriptToolsVersion>
   </PropertyGroup>
 
   <ItemGroup>
     <None Remove="check-front\src\Componet\AppSidebar.tsx" />
-    <None Remove="check-front\src\Componet\Checks.tsx" />
+    <None Remove="check-front\src\Componet\Configuration.tsx" />
+    <None Remove="check-front\src\Componet\HeadMenu.tsx" />
+    <None Remove="check-front\src\Componet\Main.tsx" />
     <None Remove="check-front\src\Componet\Profile.tsx" />
-    <None Remove="check-front\src\Componet\Settings.tsx" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="2.2.4" />
-    <PackageReference Include="Microsoft.TypeScript.MSBuild" Version="3.5.2">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.3" />
   </ItemGroup>
 
@@ -30,6 +27,9 @@
 
   <ItemGroup>
     <TypeScriptCompile Include="check-front\src\Componet\AppSidebar.tsx" />
+    <TypeScriptCompile Include="check-front\src\Componet\HeadMenu.tsx" />
+    <TypeScriptCompile Include="check-front\src\Componet\Configuration.tsx" />
+    <TypeScriptCompile Include="check-front\src\Componet\Main.tsx" />
     <TypeScriptCompile Include="check-front\src\Componet\Profile.tsx" />
   </ItemGroup>
 

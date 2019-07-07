@@ -17,6 +17,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using checks.Model;
+using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 
 namespace check
 {
@@ -55,6 +56,10 @@ namespace check
                     };
                 });
             services.AddScoped<IAuthService, AuthService>();
+            services.AddSpaStaticFiles(configuration =>
+            {
+                configuration.RootPath = "MyApp/build";
+            });
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 
@@ -72,6 +77,16 @@ namespace check
             }
 
             app.UseHttpsRedirection();
+            app.UseSpa(spa =>
+            {
+                spa.Options.SourcePath = "check-front";
+
+                if (env.IsDevelopment())
+                {
+                    //spa.UseReactDevelopmentServer(npmScript: "start");
+                    spa.UseProxyToSpaDevelopmentServer("http://localhost:3000");
+                }
+            });
             app.UseMvc();
         }
     }
