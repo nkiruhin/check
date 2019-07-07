@@ -2,7 +2,7 @@
 import { Link } from 'react-router-dom'
 import { Icon } from 'office-ui-fabric-react/lib/Icon'
 import './AppSidebar.css'
-const Name = "ВАСЯ ПУПКИН"
+const Name = "ТАНДЕР"
 const AppSidebar: React.FC = () => (
     <div>
         <div className="sidebar">

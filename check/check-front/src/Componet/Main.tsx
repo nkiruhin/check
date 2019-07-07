@@ -88,7 +88,8 @@ const Main: React.FC = () => {
         maxDisplayedItems={3}
        />
        {message}
-        <DetailsList
+       <div style={{ overflow: "auto", minHeight: "610px", minWidth: "1250px" }}>
+       <DetailsList
            items={items}
            columns={columns}
            selectionMode={SelectionMode.none}
@@ -96,7 +97,8 @@ const Main: React.FC = () => {
            layoutMode={DetailsListLayoutMode.justified}
            isHeaderVisible={true}
            selectionPreservedOnEmptyClick={true}
-        />
+           />
+       </div>
     </div>
 }
 export { Main }
