@@ -27,7 +27,7 @@ const columns: IColumn[] = [
     {
         key: 'startDate',
         name: 'Дата начала',
-        fieldName: 'StartDate',
+        fieldName: 'startDate',
         minWidth: 100,
         maxWidth: 100,
         data: 'date',
@@ -59,16 +59,19 @@ const columns: IColumn[] = [
 ]
 const emptyItems: ICheckItem[] = [];
 const Main: React.FC = () => {
+
     const [items, setItems] = React.useState(emptyItems)
+    const [message, setMessage] = React.useState("Подождите идет загрузка...")
     const _setItems = (data: ICheckItem[], status: number) => {
         if (status === 200) {
             setItems(data)
         } else {
             console.log("Ошибка загрузки данных")
         }
+        setMessage("");
     }
     React.useEffect(() => {
-       let url = "/api/FindCheck?inn=2310031475"
+        let url = "/api/FindCheck?inn=2310031475"
        fetchApi(_setItems, url, "GET")
     }, [])
    return <div>
@@ -77,7 +80,8 @@ const Main: React.FC = () => {
         { text: 'Список', key: 'PositionsList' }
     ]}
         maxDisplayedItems={3}
-        />
+       />
+       {message}
         <DetailsList
             items={items}
             columns={columns}

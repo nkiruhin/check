@@ -56,10 +56,11 @@ namespace check
                     };
                 });
             services.AddScoped<IAuthService, AuthService>();
-            services.AddSpaStaticFiles(configuration =>
-            {
-                configuration.RootPath = "MyApp/build";
-            });
+            //services.AddSpaStaticFiles(configuration =>
+            //{
+            //    configuration.RootPath = "MyApp/build";
+            //});
+            services.AddCors();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 
@@ -77,6 +78,9 @@ namespace check
             }
 
             app.UseHttpsRedirection();
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
+            app.UseMvc();       
             app.UseSpa(spa =>
             {
                 spa.Options.SourcePath = "check-front";
@@ -87,7 +91,7 @@ namespace check
                     spa.UseProxyToSpaDevelopmentServer("http://localhost:3000");
                 }
             });
-            app.UseMvc();
+
         }
     }
 }
