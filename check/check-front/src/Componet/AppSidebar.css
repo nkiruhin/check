@@ -1,0 +1,58 @@
+﻿ul {
+    padding-top: 60px;
+}
+
+.person {
+    color: white;
+    font-size: 20px;
+    margin-left: 75px;
+    text-align: left;
+    margin-top: 60px;
+}
+
+.person a {
+    text-decoration: none;
+    color: white;
+    display: block;
+}
+
+.person a:hover {
+    text-decoration: none;
+    color: black;
+    display: block;
+}
+
+li {
+    list-style-type: none;
+}
+
+.button {
+    background-color: #1d89e4;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    margin-top: 20px;
+    margin-right: 35px;
+}
+
+.sidebar {
+    height: 92vh;
+    display: flex;
+    flex-direction: column;
+    background: #28373e
+}
+
+li a {
+    text-decoration: none;
+    color: white;
+    display: block;
+}
+
+li a:hover {
+    text-decoration: none;
+    color: black;
+}

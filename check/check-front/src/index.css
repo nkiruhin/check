@@ -20,9 +20,8 @@ li a {
 .App .header {
     height: 3.5em;
     width: 100%;
+    background: #1d89e4
 }
-
-
 
 .App .body {
     max-height: 88vh;
