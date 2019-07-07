@@ -49,9 +49,9 @@ const columns: IColumn[] = [
         data: 'string',
     },
     {
-        key: 'prosecutorsName',
+        key: 'providerOrganizationName',
         name: 'Надзорный орган',
-        fieldName: 'prosecutorsName',
+        fieldName: 'providerOrganizationName',
         minWidth: 150,
         maxWidth: 200,
         data: 'string',

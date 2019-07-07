@@ -5,6 +5,7 @@ using System.Linq.Expressions;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using check.Models;
+using check.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -14,6 +15,14 @@ namespace check.Controllers
     [ApiController]
     public class FindCheckController : ControllerBase
     {
+        private readonly ILoadData _loadData;
+
+
+        public FindCheckController(ILoadData loadData)
+        {
+            _loadData = loadData;
+        }
+
         // GET: api/FindCheck
         [HttpGet]
         public ActionResult<List<CheckEntity>> Get([FromQuery] string inn,string trim)
@@ -22,8 +31,7 @@ namespace check.Controllers
             {
                 return NotFound(new { message = "Данные не найдены" });
             }
-
-            XDocument data = XDocument.Load("c:/checks/data.xml");
+            XDocument data = _loadData.GetDocument();
            
             string namespeces = "{"+data.Root.Name.NamespaceName+"}";
             var inspections = data.Root.Elements();

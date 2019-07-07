@@ -56,6 +56,7 @@ namespace check
                     };
                 });
             services.AddScoped<IAuthService, AuthService>();
+            services.AddSingleton<ILoadData, LoadData>();
             //services.AddSpaStaticFiles(configuration =>
             //{
             //    configuration.RootPath = "MyApp/build";
