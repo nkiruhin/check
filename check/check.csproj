@@ -8,6 +8,9 @@
 
   <ItemGroup>
     <None Remove="check-front\src\Componet\AppSidebar.tsx" />
+    <None Remove="check-front\src\Componet\Configuration.tsx" />
+    <None Remove="check-front\src\Componet\HeadMenu.tsx" />
+    <None Remove="check-front\src\Componet\Main.tsx" />
     <None Remove="check-front\src\Componet\Profile.tsx" />
   </ItemGroup>
 
@@ -24,6 +27,9 @@
 
   <ItemGroup>
     <TypeScriptCompile Include="check-front\src\Componet\AppSidebar.tsx" />
+    <TypeScriptCompile Include="check-front\src\Componet\HeadMenu.tsx" />
+    <TypeScriptCompile Include="check-front\src\Componet\Configuration.tsx" />
+    <TypeScriptCompile Include="check-front\src\Componet\Main.tsx" />
     <TypeScriptCompile Include="check-front\src\Componet\Profile.tsx" />
   </ItemGroup>
 
