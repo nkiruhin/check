@@ -3,7 +3,13 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
+    <TypeScriptToolsVersion>3.1</TypeScriptToolsVersion>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="check-front\src\Componet\AppSidebar.tsx" />
+    <None Remove="check-front\src\Componet\Profile.tsx" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
@@ -14,6 +20,11 @@
 
   <ItemGroup>
     <Folder Include="db\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="check-front\src\Componet\AppSidebar.tsx" />
+    <TypeScriptCompile Include="check-front\src\Componet\Profile.tsx" />
   </ItemGroup>
 
 </Project>
