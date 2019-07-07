@@ -20,6 +20,7 @@ const columns: IColumn[] = [
         key: 'goalOrganizationName',
         name: 'Организация',
         fieldName: 'goalOrganizationName',
+        isResizable: true,
         minWidth: 100,
         maxWidth: 100,
         data: 'string',
@@ -39,6 +40,10 @@ const columns: IColumn[] = [
         maxWidth: 100,
         fieldName: 'status',
         data: 'string',
+        onRender: (item: ICheckItem) => {
+            if (item.status.toLowerCase().includes("завершена".toLowerCase())) return <span style={{ color: "green" }}>{item.status}</span>;
+            else return <span style={{ color: "red" }}>{item.status}</span>;
+        },
     },
     {
         key: 'typeName',
@@ -54,6 +59,7 @@ const columns: IColumn[] = [
         fieldName: 'providerOrganizationName',
         minWidth: 150,
         maxWidth: 200,
+        isResizable: true,
         data: 'string',
     }
 ]
@@ -83,13 +89,13 @@ const Main: React.FC = () => {
        />
        {message}
         <DetailsList
-            items={items}
-            columns={columns}
-            selectionMode={SelectionMode.single}
-            setKey="set"
-            layoutMode={DetailsListLayoutMode.justified}
-            isHeaderVisible={true}
-            selectionPreservedOnEmptyClick={true}
+           items={items}
+           columns={columns}
+           selectionMode={SelectionMode.none}
+           setKey="set"
+           layoutMode={DetailsListLayoutMode.justified}
+           isHeaderVisible={true}
+           selectionPreservedOnEmptyClick={true}
         />
     </div>
 }
